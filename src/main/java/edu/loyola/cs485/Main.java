@@ -7,6 +7,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        testDao();
+    }
+
+    public static void testDao(){
         PlaylistService ps = new PlaylistService();
 
         try{
@@ -25,7 +29,7 @@ public class Main {
             ps.updatePlaylist(newPlaylist.getId(), "IGOR", "010/12/2005 07:41:35");
 
             // PRINT AGAIN -> updated list
-           printList(ps.listPlaylist());
+            printList(ps.listPlaylist());
 
             // Delete last playlist
             ps.deletePlaylist(newPlaylist.getId());
@@ -37,6 +41,7 @@ public class Main {
             System.out.println(e);
         }
     }
+
 
     public static void printList(List<Playlist> list){
         System.out.println();
