@@ -2,11 +2,14 @@ package edu.loyola.cs485;
 
 import edu.loyola.cs485.controller.PlaylistService;
 import edu.loyola.cs485.model.entity.Playlist;
+import edu.loyola.cs485.view.MainFrame;
 
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        MainFrame frame = new MainFrame(); // Instantiates the Window
+        frame.setVisible(true); // Activates it (and turn it visible)
         testDao();
     }
 
