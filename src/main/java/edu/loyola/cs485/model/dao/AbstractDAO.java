@@ -19,7 +19,9 @@ public abstract class AbstractDAO<E extends AbstractEntity>{
         return DriverManager.getConnection(ConUrl+":"+Port+"/"+Database+ "?user="+Username+"&password="+Password);
     }
 
-    public void setTestDatabase(){}
+    public void setTestDatabase(){
+        this.Database = "music_db_test";
+    }
 
     // Abstract Methods for each CRUD operation
     public abstract void create(E entity) throws SQLException;
