@@ -6,3 +6,6 @@ Java MVC application using JDBC to perform full CRUD operations on a selected da
 ### Requirements
 - Maven
 - Java JDK 21
+
+### Instructions
+- Create a .env file following the format in [env example](.env.example)
