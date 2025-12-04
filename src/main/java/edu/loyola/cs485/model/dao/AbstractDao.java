@@ -6,7 +6,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.*;
 import java.util.List;
 
-public abstract class AbstractDAO<E extends AbstractEntity>{
+public abstract class AbstractDao<E extends AbstractEntity>{
     Dotenv dotenv = Dotenv.load();
 
     private String ConUrl = dotenv.get("DB_URL");
