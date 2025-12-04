@@ -1,8 +1,8 @@
 package edu.loyola.cs485.view;
 
+import edu.loyola.cs485.model.entity.Playlist;
 import edu.loyola.cs485.controller.PlaylistService;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -14,11 +14,18 @@ public class ClientInfoDialog extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTextField txtName;
+    private Playlist existingPlaylist;
 
-    public ClientInfoDialog() {
+    public ClientInfoDialog(Playlist existingPlaylist) {
+        this.existingPlaylist = existingPlaylist;
+
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+
+        if (this.existingPlaylist != null) {
+            txtName.setText(this.existingPlaylist.getName());
+        }
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -55,8 +62,13 @@ public class ClientInfoDialog extends JDialog {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
             String strTimestamp = sdf.format(new Date());
-            
-            service.createPlaylist(name, strTimestamp);
+
+            if(this.existingPlaylist != null) {
+                String existingTimestamp = sdf.format(this.existingPlaylist.getCreationTimestamp());
+                service.updatePlaylist(this.existingPlaylist.getId(), name, existingTimestamp);
+            } else {
+                service.createPlaylist(name, strTimestamp);
+            }
             dispose();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -70,7 +82,7 @@ public class ClientInfoDialog extends JDialog {
     }
 
     public static void main(String[] args) {
-        ClientInfoDialog dialog = new ClientInfoDialog();
+        ClientInfoDialog dialog = new ClientInfoDialog(null);
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
