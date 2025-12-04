@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaylistDAO extends AbstractDAO<Playlist> {
+public class PlaylistDao extends AbstractDao<Playlist> {
    @Override
     public void create(Playlist entity) throws SQLException{
        Connection con = getConnection();
