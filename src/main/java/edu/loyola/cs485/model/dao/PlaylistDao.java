@@ -17,7 +17,7 @@ public class PlaylistDao extends AbstractDao<Playlist> {
        PreparedStatement pst = con.prepareStatement(sqlScript, PreparedStatement.RETURN_GENERATED_KEYS);
        pst.setString(1, entity.getName());
        pst.setObject(2, entity.getCreationTimestamp());
-       pst.executeQuery();
+       pst.executeUpdate();
 
        ResultSet rs = pst.getGeneratedKeys();
        if(rs.next()){
@@ -45,14 +45,25 @@ public class PlaylistDao extends AbstractDao<Playlist> {
    }
 
    @Override
-    public void update(Playlist entity) throws SQLException{}
+    public void update(Playlist entity) throws SQLException{
+       Connection con = getConnection();
+       String sqlScript = "UPDATE playlist " +
+               "SET name = ?, date_created = ? " +
+               "WHERE id_playlist = ?";
+
+       PreparedStatement pst = con.prepareStatement(sqlScript);
+       pst.setString(1, entity.getName());
+       pst.setObject(2, entity.getCreationTimestamp());
+       pst.setInt(3, entity.getId());
+       pst.executeUpdate();
+   }
    @Override
     public void delete(int ID) throws SQLException{
        Connection con = getConnection();
-       String sqlScript = "DELETE * from playlist where id_playlist = ?";
+       String sqlScript = "DELETE FROM playlist where id_playlist = ?";
        PreparedStatement pst = con.prepareStatement(sqlScript);
        pst.setInt(1, ID);
-       pst.executeQuery();
+       pst.executeUpdate();
        con.close();
    }
 
