@@ -6,6 +6,8 @@ Java MVC application using JDBC to perform full CRUD operations on a selected da
 ### Requirements
 - Maven
 - Java JDK 21
+- MySQL
 
-### Instructions
+### Setup Instructions
 - Create a .env file following the format in [env example](.env.example)
+- Run [SQL Initialization Script](Schema.sql) in MySQL Workbench
