@@ -26,8 +26,7 @@ public class Main {
             // Read all
             List<Playlist> list = ps.listPlaylist();
             printList(list);
-            Playlist newPlaylist = list.getLast();
-
+            Playlist newPlaylist = list.get(list.size()-1);
             // Update
             ps.updatePlaylist(newPlaylist.getId(), "IGOR", "010/12/2005 07:41:35");
 

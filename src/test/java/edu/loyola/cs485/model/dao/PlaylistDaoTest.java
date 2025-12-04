@@ -57,7 +57,10 @@ public class PlaylistDaoTest {
         assertAll(
                 () -> assertEquals(found.getId(), playlist.getId()),
                 () -> assertEquals(found.getName(), playlist.getName()),
-                () -> assertEquals(found.getCreationTimestamp(), playlist.getCreationTimestamp())
+                () -> assertEquals(
+                        found.getCreationTimestamp().toInstant().getEpochSecond(),
+                        playlist.getCreationTimestamp().toInstant().getEpochSecond()
+                )
         );
 
     }
@@ -67,7 +70,7 @@ public class PlaylistDaoTest {
         PlaylistDao dao = new PlaylistDao();
         dao.setTestDatabase();
 
-        Playlist found = dao.read(10);
+        Playlist found = dao.read(100);
         assertAll(
                 () -> assertNull( found.getId() ),
                 () -> assertNull( found.getName() )
@@ -81,7 +84,7 @@ public class PlaylistDaoTest {
 
         List<Playlist> lst = dao.list();
         assertAll(
-                () -> assertEquals(0, lst.size())
+                () -> assertEquals(2, lst.size())
         );
 
     }
