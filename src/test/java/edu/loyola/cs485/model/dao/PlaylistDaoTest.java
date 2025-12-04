@@ -52,7 +52,7 @@ public class PlaylistDaoTest {
         Playlist found = dao.read(playlist.getId()); //Function under test
 
         //clean up
-        dao.delete( playlist.getID() );
+        dao.delete( playlist.getId() );
 
         assertAll(
                 () -> assertEquals(found.getId(), playlist.getId()),
@@ -69,7 +69,7 @@ public class PlaylistDaoTest {
 
         Playlist found = dao.read(10);
         assertAll(
-                () -> assertNull( found.getID() ),
+                () -> assertNull( found.getId() ),
                 () -> assertNull( found.getName() )
         );
     }
