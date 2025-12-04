@@ -2,12 +2,12 @@ package edu.loyola.cs485.model.dao;
 
 import edu.loyola.cs485.model.entity.Playlist;
 
-import javax.swing.tree.RowMapper;
+// import javax.swing.tree.RowMapper;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaylistDao extends AbstractDao<Playlist> {
+public class PlaylistDAO extends AbstractDAO<Playlist> {
    @Override
     public void create(Playlist entity) throws SQLException{
        Connection con = getConnection();
