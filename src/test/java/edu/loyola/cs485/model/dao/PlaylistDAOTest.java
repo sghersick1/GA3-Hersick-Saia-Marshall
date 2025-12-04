@@ -5,6 +5,8 @@ import edu.loyola.cs485.model.dao.PlaylistDAO;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
+import java.sql.Time;
+import java.sql.Timestamp;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,53 +22,53 @@ public class PlaylistDAOTest {
 
     @Test
     public void testCreatePlaylist() throws Exception{
-        ClientDAO dao = new ClientDAO();
+        PlaylistDAO dao = new PlaylistDAO();
         dao.setTestDatabase();
 
-        Client client = new Client();
-        client.setName("Test Client");
-        client.setEmail("test@email.com");
+        Playlist playlist = new Playlist();
+        playlist.setName("Test Playlist");
+        playlist.setCreationTimestamp( new Timestamp(System.currentTimeMillis()) );
 
-        dao.create(client); // Method Under Test
+        dao.create(playlist); // Method Under Test
 
         //clean up
-        dao.delete( client.getID() );
+        dao.delete( playlist.getID() );
 
         assertAll(
-                () -> assertNotNull( client.getID() )
+                () -> assertNotNull( playlist.getID() )
         );
     }
 
     @Test
     public void testReadPlaylist() throws Exception{
-        ClientDAO dao = new ClientDAO();
+        PlaylistDAO dao = new PlaylistDAO();
         dao.setTestDatabase();
 
-        Client client = new Client();
-        client.setName("Test Client");
-        client.setEmail("test@email.com");
+        Playlist playlist = new Playlist();
+        playlist.setName("Test Playlist");
+        playlist.setEmail("test@email.com");
 
-        dao.create(client);
-        Client found = dao.read(client.getID()); //Function under test
+        dao.create(playlist);
+        Playlist found = dao.read(playlist.getID()); //Function under test
 
         //clean up
-        dao.delete( client.getID() );
+        dao.delete( playlist.getID() );
 
         assertAll(
-                () -> assertEquals(found.getID(), client.getID()),
-                () -> assertEquals(found.getName(), client.getName()),
-                () -> assertEquals(found.getEmail(), client.getEmail()),
-                () -> assertEquals(found.getDob(), client.getDob())
+                () -> assertEquals(found.getID(), playlist.getID()),
+                () -> assertEquals(found.getName(), playlist.getName()),
+                () -> assertEquals(found.getEmail(), playlist.getEmail()),
+                () -> assertEquals(found.getDob(), playlist.getDob())
         );
 
     }
 
     @Test
-    public void testReadClientDoesNotExist() throws Exception{
-        ClientDAO dao = new ClientDAO();
+    public void testReadPlaylistDoesNotExist() throws Exception{
+        PlaylistDAO dao = new PlaylistDAO();
         dao.setTestDatabase();
 
-        Client found = dao.read(10);
+        Playlist found = dao.read(10);
         assertAll(
                 () -> assertNull( found.getID() ),
                 () -> assertNull( found.getName() )
@@ -74,11 +76,11 @@ public class PlaylistDAOTest {
     }
 
     @Test
-    public void testListClient() throws Exception{
-        ClientDAO dao = new ClientDAO();
+    public void testListPlaylist() throws Exception{
+        PlaylistDAO dao = new PlaylistDAO();
         dao.setTestDatabase();
 
-        List<Client> lst = dao.list();
+        List<Playlist> lst = dao.list();
         assertAll(
                 () -> assertEquals(0, lst.size())
         );
